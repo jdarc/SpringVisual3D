@@ -134,7 +134,7 @@ func _update_shader() -> void:
 	var radius := coil_radius + wire_radius
 	var coil_diameter := radius * 2.0
 	var height := current_length + wire_radius * 2.0
-	_spring_mesh_instance.custom_aabb.position = Vector3(-radius, -wire_radius, -radius)
+	_spring_mesh_instance.custom_aabb.position = Vector3(-radius, -height * 0.5, -radius)
 	_spring_mesh_instance.custom_aabb.size = Vector3(coil_diameter, height, coil_diameter)
 
 	var cylinder := _spring_mesh_instance.mesh as CylinderMesh
