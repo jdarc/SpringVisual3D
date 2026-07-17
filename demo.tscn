@@ -24,7 +24,7 @@ adjustment_brightness = 1.1
 adjustment_contrast = 1.3
 adjustment_saturation = 1.15
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_c6xj6"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_0bhed"]
 _surfaces = [{
 "aabb": AABB(-0.325, -0.325, -1, 0.65, 0.65, 2),
 "format": 34359742465,
@@ -36,7 +36,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("ZmamPgAAAAAAAIA/ZmamPgAAAAAAAIC/yruZPs+2/j0AAIA/yruZPs+2/j0AAIC/PFNrPjxTaz4AAIA/PFNrPjxTaz4AAIC/z7b+Pcq7mT4AAIA/z7b+Pcq7mT4AAIC/M4u3I2Zmpj4AAIA/M4u3I2Zmpj4AAIC/z7b+vcq7mT4AAIA/z7b+vcq7mT4AAIC/PFNrvjxTaz4AAIA/PFNrvjxTaz4AAIC/yruZvs+2/j0AAIA/yruZvs+2/j0AAIC/ZmamvjOLNyQAAIA/ZmamvjOLNyQAAIC/yruZvs+2/r0AAIA/yruZvs+2/r0AAIC/PFNrvjxTa74AAIA/PFNrvjxTa74AAIC/z7b+vcq7mb4AAIA/z7b+vcq7mb4AAIC/ZqiJpGZmpr4AAIA/ZqiJpGZmpr4AAIC/z7b+Pcq7mb4AAIA/z7b+Pcq7mb4AAIC/PFNrPjxTa74AAIA/PFNrPjxTa74AAIC/yruZPs+2/r0AAIA/yruZPs+2/r0AAIC/ZmamPjOLt6QAAIA/ZmamPjOLt6QAAIC/")
 }]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6bw2v"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m0rpm"]
 render_priority = 0
 shader = ExtResource("1_0bhed")
 
@@ -54,8 +54,8 @@ directional_shadow_pancake_size = 0.1
 
 [node name="SpringVisual3D" type="MeshInstance3D" parent="." unique_id=1346893032 node_paths=PackedStringArray("anchor_node", "target_node")]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
-mesh = SubResource("ArrayMesh_c6xj6")
-surface_material_override/0 = SubResource("ShaderMaterial_6bw2v")
+mesh = SubResource("ArrayMesh_0bhed")
+surface_material_override/0 = SubResource("ShaderMaterial_m0rpm")
 script = ExtResource("2_m0rpm")
 anchor_node = NodePath("../Anchor")
 target_node = NodePath("../Target")
