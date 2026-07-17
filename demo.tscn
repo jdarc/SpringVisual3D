@@ -1,0 +1,70 @@
+[gd_scene format=4 uid="uid://btg2hxyyi7fio"]
+
+[ext_resource type="Shader" uid="uid://b3clkueroor5o" path="res://addons/spring_visual_3d/tube.gdshader" id="1_0bhed"]
+[ext_resource type="Script" uid="uid://bvj5noihb0fcu" path="res://addons/spring_visual_3d/spring.gd" id="2_m0rpm"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1r2uh"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_curve = 0.005
+ground_energy_multiplier = 1.5
+
+[sub_resource type="Sky" id="Sky_4g6nn"]
+sky_material = SubResource("ProceduralSkyMaterial_1r2uh")
+
+[sub_resource type="Environment" id="Environment_7myax"]
+background_mode = 2
+background_color = Color(0.39215687, 0.42745098, 0.43137255, 1)
+sky = SubResource("Sky_4g6nn")
+tonemap_mode = 2
+tonemap_exposure = 1.3
+glow_enabled = true
+adjustment_enabled = true
+adjustment_brightness = 1.1
+adjustment_contrast = 1.3
+adjustment_saturation = 1.15
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_c6xj6"]
+_surfaces = [{
+"aabb": AABB(-0.325, -0.325, -1, 0.65, 0.65, 2),
+"format": 34359742465,
+"index_count": 96,
+"index_data": PackedByteArray("AAACAAEAAQACAAMAAgAEAAMAAwAEAAUABAAGAAUABQAGAAcABgAIAAcABwAIAAkACAAKAAkACQAKAAsACgAMAAsACwAMAA0ADAAOAA0ADQAOAA8ADgAQAA8ADwAQABEAEAASABEAEQASABMAEgAUABMAEwAUABUAFAAWABUAFQAWABcAFgAYABcAFwAYABkAGAAaABkAGQAaABsAGgAcABsAGwAcAB0AHAAeAB0AHQAeAB8AHgAgAB8AHwAgACEA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 34,
+"vertex_data": PackedByteArray("ZmamPgAAAAAAAIA/ZmamPgAAAAAAAIC/yruZPs+2/j0AAIA/yruZPs+2/j0AAIC/PFNrPjxTaz4AAIA/PFNrPjxTaz4AAIC/z7b+Pcq7mT4AAIA/z7b+Pcq7mT4AAIC/M4u3I2Zmpj4AAIA/M4u3I2Zmpj4AAIC/z7b+vcq7mT4AAIA/z7b+vcq7mT4AAIC/PFNrvjxTaz4AAIA/PFNrvjxTaz4AAIC/yruZvs+2/j0AAIA/yruZvs+2/j0AAIC/ZmamvjOLNyQAAIA/ZmamvjOLNyQAAIC/yruZvs+2/r0AAIA/yruZvs+2/r0AAIC/PFNrvjxTa74AAIA/PFNrvjxTa74AAIC/z7b+vcq7mb4AAIA/z7b+vcq7mb4AAIC/ZqiJpGZmpr4AAIA/ZqiJpGZmpr4AAIC/z7b+Pcq7mb4AAIA/z7b+Pcq7mb4AAIC/PFNrPjxTa74AAIA/PFNrPjxTa74AAIC/yruZPs+2/r0AAIA/yruZPs+2/r0AAIC/ZmamPjOLt6QAAIA/ZmamPjOLt6QAAIC/")
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6bw2v"]
+render_priority = 0
+shader = ExtResource("1_0bhed")
+
+[node name="Test" type="Node3D" unique_id=664177242]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=617182355]
+environment = SubResource("Environment_7myax")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=436925653]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 3, 0)
+light_color = Color(1, 0.9607843, 0.88235295, 1)
+shadow_enabled = true
+directional_shadow_max_distance = 20.0
+directional_shadow_pancake_size = 0.1
+
+[node name="SpringVisual3D" type="MeshInstance3D" parent="." unique_id=1346893032 node_paths=PackedStringArray("anchor_node", "target_node")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
+mesh = SubResource("ArrayMesh_c6xj6")
+surface_material_override/0 = SubResource("ShaderMaterial_6bw2v")
+script = ExtResource("2_m0rpm")
+anchor_node = NodePath("../Anchor")
+target_node = NodePath("../Target")
+rings = 384
+albedo = Color(0.61740726, 0.8276807, 0.6454895, 1)
+metadata/_custom_type_script = "uid://bvj5noihb0fcu"
+
+[node name="Anchor" type="Marker3D" parent="." unique_id=1415619568]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="Target" type="Marker3D" parent="." unique_id=512567879]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
