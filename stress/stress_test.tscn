@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://cmrpoyioolkdc"]
+
+[ext_resource type="Script" uid="uid://bgyc10rpbdxm3" path="res://stress/stress_test.gd" id="1_fh36w"]
+[ext_resource type="PackedScene" uid="uid://5mx2ygugsg3j" path="res://stress/oscillating_spring.tscn" id="2_fh36w"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1r2uh"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_curve = 0.005
+ground_energy_multiplier = 1.5
+
+[sub_resource type="Sky" id="Sky_4g6nn"]
+sky_material = SubResource("ProceduralSkyMaterial_1r2uh")
+
+[sub_resource type="Environment" id="Environment_7jsvg"]
+background_mode = 2
+background_color = Color(0.39215687, 0.42745098, 0.43137255, 1)
+sky = SubResource("Sky_4g6nn")
+tonemap_mode = 2
+tonemap_exposure = 1.3
+glow_enabled = true
+adjustment_enabled = true
+adjustment_brightness = 1.1
+adjustment_contrast = 1.3
+adjustment_saturation = 1.15
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mhife"]
+albedo_color = Color(0.1882353, 0.1882353, 0.19607843, 1)
+metallic_specular = 0.0
+roughness = 0.0
+proximity_fade_enabled = true
+proximity_fade_distance = 1000.0
+distance_fade_min_distance = 1.0
+distance_fade_max_distance = 2.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_wql6p"]
+size = Vector3(4000, 1, 4000)
+
+[node name="Stress" type="Node3D" unique_id=664177242]
+script = ExtResource("1_fh36w")
+spring_scene = ExtResource("2_fh36w")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=617182355]
+environment = SubResource("Environment_7jsvg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=436925653]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 18.332138, 0)
+light_color = Color(1, 0.9607843, 0.88235295, 1)
+shadow_enabled = true
+shadow_opacity = 0.9
+directional_shadow_mode = 1
+directional_shadow_max_distance = 50.0
+
+[node name="CameraControl" type="Node3D" parent="." unique_id=1554570491]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraControl" unique_id=320025948]
+transform = Transform3D(1, 0, 0, 0, 0.9961947, 0.08715574, 0, -0.08715574, 0.9961947, 0, 1, 50)
+fov = 60.0
+far = 1000.0
+
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=754365870]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = SubResource("StandardMaterial3D_mhife")
+mesh = SubResource("BoxMesh_wql6p")
+
+[node name="Springs" type="Node3D" parent="." unique_id=1431643111]

@@ -1,0 +1,38 @@
+[gd_scene format=4 uid="uid://5mx2ygugsg3j"]
+
+[ext_resource type="Shader" uid="uid://b3clkueroor5o" path="res://addons/spring_visual_3d/tube.gdshader" id="1_asbll"]
+[ext_resource type="Script" uid="uid://klbiwx1dncd5" path="res://stress/oscillating_spring.gd" id="1_dr0bl"]
+[ext_resource type="Script" uid="uid://bvj5noihb0fcu" path="res://addons/spring_visual_3d/spring.gd" id="2_iqsiu"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_6gir6"]
+_surfaces = [{
+"aabb": AABB(-0.325, -0.325, -1, 0.65, 0.65, 2),
+"format": 34359742465,
+"index_count": 96,
+"index_data": PackedByteArray("AAACAAEAAQACAAMAAgAEAAMAAwAEAAUABAAGAAUABQAGAAcABgAIAAcABwAIAAkACAAKAAkACQAKAAsACgAMAAsACwAMAA0ADAAOAA0ADQAOAA8ADgAQAA8ADwAQABEAEAASABEAEQASABMAEgAUABMAEwAUABUAFAAWABUAFQAWABcAFgAYABcAFwAYABkAGAAaABkAGQAaABsAGgAcABsAGwAcAB0AHAAeAB0AHQAeAB8AHgAgAB8AHwAgACEA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 34,
+"vertex_data": PackedByteArray("ZmamPgAAAAAAAIA/ZmamPgAAAAAAAIC/yruZPs+2/j0AAIA/yruZPs+2/j0AAIC/PFNrPjxTaz4AAIA/PFNrPjxTaz4AAIC/z7b+Pcq7mT4AAIA/z7b+Pcq7mT4AAIC/M4u3I2Zmpj4AAIA/M4u3I2Zmpj4AAIC/z7b+vcq7mT4AAIA/z7b+vcq7mT4AAIC/PFNrvjxTaz4AAIA/PFNrvjxTaz4AAIC/yruZvs+2/j0AAIA/yruZvs+2/j0AAIC/ZmamvjOLNyQAAIA/ZmamvjOLNyQAAIC/yruZvs+2/r0AAIA/yruZvs+2/r0AAIC/PFNrvjxTa74AAIA/PFNrvjxTa74AAIC/z7b+vcq7mb4AAIA/z7b+vcq7mb4AAIC/ZqiJpGZmpr4AAIA/ZqiJpGZmpr4AAIC/z7b+Pcq7mb4AAIA/z7b+Pcq7mb4AAIC/PFNrPjxTa74AAIA/PFNrPjxTa74AAIC/yruZPs+2/r0AAIA/yruZPs+2/r0AAIC/ZmamPjOLt6QAAIA/ZmamPjOLt6QAAIC/")
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dy81n"]
+render_priority = 0
+shader = ExtResource("1_asbll")
+
+[node name="Spring" type="Node3D" unique_id=883695398]
+script = ExtResource("1_dr0bl")
+
+[node name="SpringVisual3D" type="MeshInstance3D" parent="." unique_id=329205756 node_paths=PackedStringArray("anchor_node", "target_node")]
+transform = Transform3D(0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0)
+mesh = SubResource("ArrayMesh_6gir6")
+surface_material_override/0 = SubResource("ShaderMaterial_dy81n")
+script = ExtResource("2_iqsiu")
+anchor_node = NodePath("../Anchor")
+target_node = NodePath("../Target")
+metadata/_custom_type_script = "uid://bvj5noihb0fcu"
+
+[node name="Anchor" type="Marker3D" parent="." unique_id=392899220]
+
+[node name="Target" type="Marker3D" parent="." unique_id=1751289777]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
