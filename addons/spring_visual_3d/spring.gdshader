@@ -3,19 +3,22 @@
 shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
 
-uniform vec4 albedo: source_color = vec4(1.0);
-uniform float metallic: hint_range(0.0, 1.0, 0.01) = 0.0;
-uniform float specular: hint_range(0.0, 1.0, 0.01) = 0.5;
-uniform float roughness: hint_range(0.0, 1.0, 0.01) = 1.0;
-uniform float wire_radius: hint_range(0.001, 0.5) = 0.05;
-uniform float coil_radius: hint_range(0.01, 2.0) = 0.3;
+uniform float wire_radius : hint_range(0.001, 0.5) = 0.05;
+uniform float coil_radius : hint_range(0.01, 2.0) = 0.3;
 uniform float total_coils : hint_range(1.0, 100.0) = 10.0;
+uniform float height_normalize = 1.0;
 uniform float current_length = 1.0;
+
+uniform vec4 albedo : source_color = vec4(0.82, 0.82, 0.87, 1.0);
+uniform float metallic : hint_range(0.0, 1.0, 0.01) = 0.91;
+uniform float specular : hint_range(0.0, 1.0, 0.01) = 0.5;
+uniform float roughness : hint_range(0.0, 1.0) = 0.21;
+
 
 void vertex() {
 	float base_mesh_radius = max(0.0001, length(VERTEX.xz));
 	vec2 wire_offset = (VERTEX.xz / base_mesh_radius) * wire_radius;
-	float mesh_progress = VERTEX.y * 999.9;
+	float mesh_progress = VERTEX.y * height_normalize;
 	vec3 path_pos1 = vec3(0.0, mesh_progress * current_length, 0.0);
 	vec3 path_pos2 = vec3(0.0, (mesh_progress + 0.0001) * current_length, 0.0);
 	vec3 path_normal = vec3(1.0, 0.0, 0.0);
