@@ -31,7 +31,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _boot_strap() -> void:
 	_thread = Thread.new()
-	_thread.start(_generate_mucho_springs, Thread.PRIORITY_LOW)
+	_thread.start(_generate_mucho_springs)
 
 
 func _wait_to_finish() -> void:
@@ -44,7 +44,7 @@ func _exit_tree():
 
 
 func _generate_mucho_springs() -> void:
-	var size := 50
+	var size := 80
 	for z: int in range(-size, size, 2):
 		for x: int in range(-size, size, 2):
 			if !_running:
@@ -57,4 +57,3 @@ func _generate_mucho_springs() -> void:
 				var thing: Node3D = spring_scene.instantiate()
 				thing.position = pos
 				springs.call_deferred(&"add_child", thing)
-				OS.delay_usec(50)

@@ -4,32 +4,33 @@
 [ext_resource type="Shader" uid="uid://1r64xr0q0xy3" path="res://addons/spring_visual_3d/spring.gdshader" id="2_6gir6"]
 [ext_resource type="Script" uid="uid://bvj5noihb0fcu" path="res://addons/spring_visual_3d/spring.gd" id="2_iqsiu"]
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_6gir6"]
+radial_segments = 16
+rings = 256
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6gir6"]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_6gir6")
 shader_parameter/wire_radius = 0.05
 shader_parameter/coil_radius = 0.3
 shader_parameter/total_coils = 10.0
-shader_parameter/height_normalize = 0.5
-shader_parameter/current_length = 2.0
+shader_parameter/spring_length = 2.0
+shader_parameter/mesh_height = 1.0
+shader_parameter/inv_scale = Vector3(1.4285715, 0.4761905, 1.4285715)
 shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/metallic = 0.8
+shader_parameter/metallic = 0.9
 shader_parameter/specular = 0.5
 shader_parameter/roughness = 0.2
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_6gir6"]
-resource_local_to_scene = true
-material = SubResource("ShaderMaterial_6gir6")
-radial_segments = 12
-rings = 200
 
 [node name="Spring" type="Node3D" unique_id=883695398]
 script = ExtResource("1_dr0bl")
 
 [node name="SpringVisual3D" type="MeshInstance3D" parent="." unique_id=329205756 node_paths=PackedStringArray("anchor_node", "target_node")]
-transform = Transform3D(0, 0, -1, 0, -1, 0, -1, 0, 0, 0, 1, 0)
-custom_aabb = AABB(-0.35, -1.05, -0.35, 0.7, 2.1, 0.7)
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 2.1, 0, 0.7, 0, -3.059797e-08, 0, 1, 0)
+top_level = true
 mesh = SubResource("CylinderMesh_6gir6")
+surface_material_override/0 = SubResource("ShaderMaterial_6gir6")
 script = ExtResource("2_iqsiu")
 anchor_node = NodePath("../Anchor")
 target_node = NodePath("../Target")
